@@ -3,6 +3,7 @@ const {
   addProjectService,
   getProjectsService,
   getProjectByIdAndWebsiteNameService,
+  getProjectMediaService,
 } = require("../Service/project.service");
 
 exports.addProject = async (req, res) => {
@@ -39,4 +40,10 @@ exports.getProjectByIdAndWebsiteName = async (req, res) => {
     websiteName
   );
   res.status(200).json(projectDetails);
+};
+
+exports.getProjectMedia = async (req, res) => {
+  const { projectID, websiteName } = req.params;
+  const projectMedia = await getProjectMediaService(projectID, websiteName);
+  res.status(200).json(projectMedia);
 };

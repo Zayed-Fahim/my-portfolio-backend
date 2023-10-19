@@ -2,6 +2,18 @@ const mongoose = require("mongoose");
 
 const projectSchema = mongoose.Schema(
   {
+    projectID: {
+      type: Number,
+      required: true,
+    },
+    websitePrimaryColor: [
+      {
+        colorCode: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     title: {
       type: String,
       trim: true,
@@ -46,16 +58,12 @@ const projectSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    media: [
+    featuredPhotos: [
       {
         title: {
           type: String,
           required: true,
           trim: true,
-        },
-        description: {
-          type: String,
-          required: true,
         },
         image: {
           type: String,
@@ -63,6 +71,21 @@ const projectSchema = mongoose.Schema(
         },
       },
     ],
+    media: {
+      photos: [
+        {
+          title: {
+            type: String,
+            required: true,
+            trim: true,
+          },
+          image: {
+            type: String,
+            required: true,
+          },
+        },
+      ],
+    },
     tools: [
       {
         name: {
@@ -75,10 +98,6 @@ const projectSchema = mongoose.Schema(
         },
       },
     ],
-    projectID: {
-      type: Number,
-      required: true,
-    },
   },
   { timestamps: true }
 );

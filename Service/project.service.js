@@ -18,3 +18,11 @@ exports.getProjectByIdAndWebsiteNameService = async (
   });
   return project;
 };
+
+exports.getProjectMediaService = async (projectID, websiteName) => {
+  const project = await Project.find({
+    $and: [{ projectID: projectID }, { websiteName: websiteName }],
+  });
+  const projectMedia = project.map((item) => item?.media);
+  return projectMedia;
+};
