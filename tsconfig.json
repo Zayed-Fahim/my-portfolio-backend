@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "outDir": "./dist",
+    "module": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext",
+    "baseUrl": "./",
+    "paths": {
+      "@/models/*": ["src/models/*"],
+      "@/blog/*": ["src/blog/*"],
+      "@/email/*": ["src/email/*"],
+      "@/email/templates/*": ["src/email/templates/*"],
+      "@/projects/*": ["src/projects/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/libs/*": ["src/libs/*"]
+    }
+  }
+}
