@@ -34,7 +34,6 @@ const sendMailService = async (data: IEmailProps) => {
       subject: data.subject || "No Subject",
       html: "<p>This is a test email.</p>",
     });
-    console.log(`Email sent to ${data?.email}`);
   } catch (error: any) {
     console.error("Failed to send email:", error.message);
     throw new Error("Failed to send email.");

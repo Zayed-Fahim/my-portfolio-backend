@@ -47,7 +47,6 @@ const sendMailService = (data) => __awaiter(void 0, void 0, void 0, function* ()
             subject: data.subject || "No Subject",
             html: "<p>This is a test email.</p>",
         });
-        console.log(`Email sent to ${data === null || data === void 0 ? void 0 : data.email}`);
     }
     catch (error) {
         console.error("Failed to send email:", error.message);
