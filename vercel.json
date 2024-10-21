@@ -2,41 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/server.js",
-      "use": "@vercel/node"
+      "src": "dist/server .js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/dist/server.js"
-    },
-    {
-      "source": "(.*)",
-      "destination": "/dist/server.js"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, PATCH, DELETE"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Authorization, Content-Type"
-        },
-        {
-          "key": "cache-control",
-          "value": "s-maxage=1, stale-while-revalidate"
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "dist/server.js"
     }
   ]
 }
