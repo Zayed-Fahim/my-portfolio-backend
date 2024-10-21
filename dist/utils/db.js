@@ -16,14 +16,16 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = __importDefault(require("../config"));
 const app_1 = __importDefault(require("../app"));
 const connect = () => __awaiter(void 0, void 0, void 0, function* () {
-    const port = config_1.default.port || 3001;
     const mongoURL = config_1.default.mongoURL;
     try {
         yield mongoose_1.default.connect(mongoURL);
-        console.log("Database Connected.");
-        app_1.default.listen(port, () => {
-            console.log(`Server is running on http://localhost:${port}`);
-        });
+        console.log("Database connected successfully.");
+        if (process.env.NODE_ENV !== "production") {
+            app_1.default.listen(config_1.default.port || 3001, () => console.log(`Swagger documentation is available at http://localhost:${config_1.default.port}/api-docs`));
+        }
+        else {
+            app_1.default.listen(config_1.default.port || 3001, () => console.log(`Server is available at http://localhost:${config_1.default.port}`));
+        }
     }
     catch (err) {
         console.error("Error connecting to database:", err.message);

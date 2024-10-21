@@ -3,16 +3,25 @@ import config from "../config";
 import app from "../app";
 
 const connect = async () => {
-  const port = config.port || 3001;
   const mongoURL: string = config.mongoURL;
 
   try {
     await mongoose.connect(mongoURL);
-    console.log("Database Connected.");
+    console.log("Database connected successfully.");
 
-    app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`);
-    });
+    if (process.env.NODE_ENV !== "production") {
+      app.listen(config.port || 3001, () =>
+        console.log(
+          `Swagger documentation is available at http://localhost:${config.port}/api-docs`
+        )
+      );
+    } else {
+      app.listen(config.port || 3001, () =>
+        console.log(
+          `Server is available at http://localhost:${config.port}`
+        )
+      );
+    }
   } catch (err: any) {
     console.error("Error connecting to database:", err.message);
     throw err;

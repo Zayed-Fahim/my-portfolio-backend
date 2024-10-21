@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const email_route_1 = __importDefault(require("./email/email.route"));
+const swagger_1 = __importDefault(require("./utils/swagger"));
+const config_1 = __importDefault(require("./config"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json({
@@ -30,10 +32,15 @@ app.use(express_1.default.urlencoded({
     parameterLimit: 1000,
 }));
 app.use("/api/v2/email", email_route_1.default);
-app.get("/", (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: "My portfolio server is running successfully.",
+if (process.env.NODE_ENV !== "production") {
+    (0, swagger_1.default)(app, Number(config_1.default.port));
+}
+else {
+    app.get("/", (req, res) => {
+        res.status(200).json({
+            success: true,
+            message: "My portfolio server is running successfully.",
+        });
     });
-});
+}
 exports.default = app;
