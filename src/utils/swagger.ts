@@ -1,6 +1,9 @@
 import { Express, Request, Response } from "express";
-import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+
+import "../email/email.route";
+import path from "path";
 
 const options: swaggerJSDoc.Options = {
   definition: {
@@ -17,7 +20,7 @@ const options: swaggerJSDoc.Options = {
       },
     ],
   },
-  apis: ["src/routes/*.ts", "src/Models/*.ts"],
+  apis: [path.join(__dirname, "../email/email.route.ts")],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -27,6 +30,11 @@ const swaggerDocs = (app: Express, port: number) => {
   console.log(
     `Swagger documentation is available at http://localhost:${port}/api-docs`
   );
+
+  // app.get("/docs.json", (req: Request, res: Response) => {
+  //   res.setHeader("Content-Type", "application/json");
+  //   res.send(swaggerSpec);
+  // });
 };
 
 export default swaggerDocs;

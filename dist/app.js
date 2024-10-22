@@ -8,8 +8,10 @@ const cors_1 = __importDefault(require("cors"));
 const email_route_1 = __importDefault(require("./email/email.route"));
 const swagger_1 = __importDefault(require("./utils/swagger"));
 const config_1 = __importDefault(require("./config"));
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
+app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
 app.use(express_1.default.json({
     limit: "10mb",
     strict: true,

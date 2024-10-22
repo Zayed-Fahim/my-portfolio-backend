@@ -3,10 +3,12 @@ import cors from "cors";
 import emailRoute from "./email/email.route";
 import swaggerDocs from "./utils/swagger";
 import config from "./config";
+import path from "path";
 
 const app: Express = express();
 
 app.use(cors());
+app.use(express.static(path.join(__dirname, "public")));
 app.use(
   express.json({
     limit: "10mb",

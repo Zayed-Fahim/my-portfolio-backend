@@ -13,32 +13,30 @@ exports.sendMailController = exports.sendTestMailController = void 0;
 const email_service_1 = require("./email.service");
 const sendTestMailController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield (0, email_service_1.sendTestMailService)(req.body);
+        const response = yield (0, email_service_1.sendTestMailService)(req.body);
         res
-            .status(200)
-            .json({ success: true, message: "Test email sent successfully." });
+            .status(response.statusCode)
+            .json({ success: response.success, message: response.message });
     }
     catch (error) {
         res.status(500).json({
             success: false,
             message: "Failed to send test email.",
-            error: error.message,
         });
     }
 });
 exports.sendTestMailController = sendTestMailController;
 const sendMailController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield (0, email_service_1.sendMailService)(req.body);
+        const response = yield (0, email_service_1.sendMailService)(req.body);
         res
-            .status(200)
-            .json({ success: true, message: "Email sent successfully." });
+            .status(response.statusCode)
+            .json({ success: response.success, message: response.message });
     }
     catch (error) {
         res.status(500).json({
             success: false,
             message: "Failed to send email.",
-            error: error.message,
         });
     }
 });
