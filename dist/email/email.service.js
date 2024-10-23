@@ -61,17 +61,14 @@ const sendTestMailService = (data) => __awaiter(void 0, void 0, void 0, function
             return {
                 statusCode: 200,
                 success: true,
-                message: "Emails sent successfully.",
+                message: "Test email sent successfully.",
+                data: [],
             };
         }
         throw new Error("Failed to send test email.");
     }
     catch (error) {
-        return {
-            statusCode: 500,
-            success: false,
-            message: `Email service error: ${error.message}`,
-        };
+        throw new Error(`Failed to send test email: ${error.message}`);
     }
 });
 exports.sendTestMailService = sendTestMailService;
@@ -121,16 +118,10 @@ const sendMailService = (data) => __awaiter(void 0, void 0, void 0, function* ()
                 data: [],
             };
         }
-        else {
-            return {
-                statusCode: 500,
-                success: false,
-                message: "Failed to send email.",
-            };
-        }
+        throw new Error("Failed to send email.");
     }
     catch (error) {
-        throw new Error("Failed to send email.");
+        throw new Error(`Failed to send email: ${error.message}`);
     }
 });
 exports.sendMailService = sendMailService;

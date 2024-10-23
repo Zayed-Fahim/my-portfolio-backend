@@ -14,14 +14,16 @@ const email_service_1 = require("./email.service");
 const sendTestMailController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield (0, email_service_1.sendTestMailService)(req.body);
-        res
-            .status(response.statusCode)
-            .json({ success: response.success, message: response.message });
+        res.status(response.statusCode).json({
+            success: response.success,
+            message: response.message,
+            data: response.data,
+        });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Failed to send test email.",
+            message: `Failed to send test email: ${error.message}`,
         });
     }
 });
@@ -31,12 +33,16 @@ const sendMailController = (req, res) => __awaiter(void 0, void 0, void 0, funct
         const response = yield (0, email_service_1.sendMailService)(req.body);
         res
             .status(response.statusCode)
-            .json({ success: response.success, message: response.message });
+            .json({
+            success: response.success,
+            message: response.message,
+            data: response.data,
+        });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Failed to send email.",
+            message: `Failed to send email: ${error.message}`,
         });
     }
 });

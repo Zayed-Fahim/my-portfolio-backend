@@ -61,17 +61,14 @@ const sendTestMailService = async (data: IEmailProps) => {
       return {
         statusCode: 200,
         success: true,
-        message: "Emails sent successfully.",
+        message: "Test email sent successfully.",
+        data: [],
       };
     }
 
     throw new Error("Failed to send test email.");
   } catch (error: any) {
-    return {
-      statusCode: 500,
-      success: false,
-      message: `Email service error: ${error.message}`,
-    };
+    throw new Error(`Failed to send test email: ${error.message}`);
   }
 };
 
@@ -128,15 +125,10 @@ const sendMailService = async (data: IEmailProps) => {
         message: "Email sent successfully.",
         data: [],
       };
-    } else {
-      return {
-        statusCode: 500,
-        success: false,
-        message: "Failed to send email.",
-      };
     }
-  } catch (error: any) {
     throw new Error("Failed to send email.");
+  } catch (error: any) {
+    throw new Error(`Failed to send email: ${error.message}`);
   }
 };
 
