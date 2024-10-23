@@ -8,7 +8,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf dist && tsc --project tsconfig.json",
+    "build": "rimraf dist && tsc --project tsconfig.json && cpx \"src/email/templates/*\" dist/email/templates --clean",
     "ts.check": "tsc --project tsconfig.json",
     "start:prod": "node dist/server.js",
     "start:dev": "nodemon src/server.ts"
@@ -32,6 +32,7 @@
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "concurrently": "^9.0.1",
+    "cpx": "^1.5.0",
     "nodemon": "^3.1.7",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
