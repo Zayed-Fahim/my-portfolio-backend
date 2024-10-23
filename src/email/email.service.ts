@@ -126,6 +126,7 @@ const sendMailService = async (data: IEmailProps) => {
         statusCode: 200,
         success: true,
         message: "Email sent successfully.",
+        data: [],
       };
     } else {
       return {

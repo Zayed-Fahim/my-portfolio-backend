@@ -118,6 +118,7 @@ const sendMailService = (data) => __awaiter(void 0, void 0, void 0, function* ()
                 statusCode: 200,
                 success: true,
                 message: "Email sent successfully.",
+                data: [],
             };
         }
         else {
