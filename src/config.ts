@@ -10,6 +10,7 @@ export interface IConfig {
   smtpHost: string;
   smtpPort: string;
   smtpUser: string;
+  smtpUsername: string;
   smtpPass: string;
   smtpConfirmationSubject: string;
 }
@@ -24,6 +25,7 @@ const config = (): IConfig => {
     SMTP_HOST: smtpHost,
     SMTP_PORT: smtpPort,
     SMTP_USER: smtpUser,
+    SMTP_USERNAME: smtpUsername,
     SMTP_PASS: smtpPass,
     SMTP_CONFIRMATION_SUBJECT: smtpConfirmationSubject,
   } = process.env;
@@ -44,6 +46,7 @@ const config = (): IConfig => {
     !smtpPort ||
     !smtpUser ||
     !smtpPass ||
+    !smtpUsername ||
     !smtpConfirmationSubject
   ) {
     throw new Error("SMTP configuration is required.");
@@ -56,6 +59,7 @@ const config = (): IConfig => {
     smtpHost,
     smtpPort,
     smtpUser,
+    smtpUsername,
     smtpPass,
     smtpConfirmationSubject,
   };

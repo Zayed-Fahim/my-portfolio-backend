@@ -5,7 +5,11 @@ interface IProjectStylesProps {
 
 interface IProjectTechnologyProps {
   name: string;
-  icon: string;
+  icon: {
+    name: string;
+    className: string;
+    fill?: string;
+  };
 }
 
 export interface IProjectProps {

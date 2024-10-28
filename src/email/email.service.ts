@@ -82,18 +82,9 @@ const sendMailService = async (data: IEmailProps) => {
     });
 
     const receiverMessageOptions = {
-      from: {
-        name: data.fullName,
-        address: data.email,
-      },
-      to: {
-        name: "Zayed Fahim",
-        address: config.smtpFrom,
-      },
-      replyTo: {
-        name: data.fullName,
-        address: data.email,
-      },
+      from: `${data.fullName} <${data.email}>`,
+      to: `${config.smtpUsername} <${config.smtpFrom}>`,
+      replyTo: `${data.fullName} <${data.email}>`,
       subject: data.subject,
       html: receiverTemplate,
     };
@@ -102,18 +93,9 @@ const sendMailService = async (data: IEmailProps) => {
 
     if (response.accepted.length > 0) {
       const senderMessageOptions = {
-        from: {
-          name: "Zayed Fahim",
-          address: config.smtpFrom,
-        },
-        to: {
-          name: data.fullName,
-          address: data.email,
-        },
-        replyTo: {
-          name: "Zayed Fahim",
-          address: config.smtpFrom,
-        },
+        from: `${config.smtpUsername} <${config.smtpFrom}>`,
+        to: `${data.fullName} <${data.email}>`,
+        replyTo: `${config.smtpUsername} <${config.smtpFrom}>`,
         subject: config.smtpConfirmationSubject,
         html: senderTemplate,
       };

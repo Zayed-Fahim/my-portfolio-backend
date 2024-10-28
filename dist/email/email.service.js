@@ -77,36 +77,18 @@ const sendMailService = (data) => __awaiter(void 0, void 0, void 0, function* ()
         const receiverTemplate = yield (0, renderEjsTemplate_1.renderEjsTemplate)(receiverTemplatePath, Object.assign({}, data));
         const senderTemplate = yield (0, renderEjsTemplate_1.renderEjsTemplate)(senderTemplatePath, Object.assign({}, data));
         const receiverMessageOptions = {
-            from: {
-                name: data.fullName,
-                address: data.email,
-            },
-            to: {
-                name: "Zayed Fahim",
-                address: config_1.default.smtpFrom,
-            },
-            replyTo: {
-                name: data.fullName,
-                address: data.email,
-            },
+            from: `${data.fullName} <${data.email}>`,
+            to: `${config_1.default.smtpUsername} <${config_1.default.smtpFrom}>`,
+            replyTo: `${data.fullName} <${data.email}>`,
             subject: data.subject,
             html: receiverTemplate,
         };
         const response = yield (0, sendEmail_1.default)(receiverMessageOptions);
         if (response.accepted.length > 0) {
             const senderMessageOptions = {
-                from: {
-                    name: "Zayed Fahim",
-                    address: config_1.default.smtpFrom,
-                },
-                to: {
-                    name: data.fullName,
-                    address: data.email,
-                },
-                replyTo: {
-                    name: "Zayed Fahim",
-                    address: config_1.default.smtpFrom,
-                },
+                from: `${config_1.default.smtpUsername} <${config_1.default.smtpFrom}>`,
+                to: `${data.fullName} <${data.email}>`,
+                replyTo: `${config_1.default.smtpUsername} <${config_1.default.smtpFrom}>`,
                 subject: config_1.default.smtpConfirmationSubject,
                 html: senderTemplate,
             };

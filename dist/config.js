@@ -30,7 +30,7 @@ const dotenv = __importStar(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 dotenv.config({ path: path_1.default.resolve(__dirname, "../.env") });
 const config = () => {
-    const { MONGODB_USERNAME: mongodbUsername, MONGODB_PASSWORD: mongodbPassword, MONGODB_HOST: mongodbHost, MONGODB_DB_NAME: dbName, SMTP_FROM: smtpFrom, SMTP_HOST: smtpHost, SMTP_PORT: smtpPort, SMTP_USER: smtpUser, SMTP_PASS: smtpPass, SMTP_CONFIRMATION_SUBJECT: smtpConfirmationSubject, } = process.env;
+    const { MONGODB_USERNAME: mongodbUsername, MONGODB_PASSWORD: mongodbPassword, MONGODB_HOST: mongodbHost, MONGODB_DB_NAME: dbName, SMTP_FROM: smtpFrom, SMTP_HOST: smtpHost, SMTP_PORT: smtpPort, SMTP_USER: smtpUser, SMTP_USERNAME: smtpUsername, SMTP_PASS: smtpPass, SMTP_CONFIRMATION_SUBJECT: smtpConfirmationSubject, } = process.env;
     const mongoURL = `mongodb+srv://${mongodbUsername}:${mongodbPassword}@${mongodbHost}/${dbName}`;
     if (!process.env.MONGODB_USERNAME ||
         !process.env.MONGODB_PASSWORD ||
@@ -43,6 +43,7 @@ const config = () => {
         !smtpPort ||
         !smtpUser ||
         !smtpPass ||
+        !smtpUsername ||
         !smtpConfirmationSubject) {
         throw new Error("SMTP configuration is required.");
     }
@@ -53,6 +54,7 @@ const config = () => {
         smtpHost,
         smtpPort,
         smtpUser,
+        smtpUsername,
         smtpPass,
         smtpConfirmationSubject,
     };
