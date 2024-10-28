@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const email_route_1 = __importDefault(require("./email/email.route"));
+const project_route_1 = __importDefault(require("./project/project.route"));
 const swagger_1 = __importDefault(require("./utils/swagger"));
 const config_1 = __importDefault(require("./config"));
 const path_1 = __importDefault(require("path"));
@@ -34,6 +35,7 @@ app.use(express_1.default.urlencoded({
     parameterLimit: 1000,
 }));
 app.use("/api/v2/email", email_route_1.default);
+app.use("/api/v2/projects", project_route_1.default);
 if (process.env.NODE_ENV !== "production") {
     (0, swagger_1.default)(app, Number(config_1.default.port));
 }

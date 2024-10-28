@@ -20,16 +20,13 @@ const options: swaggerJSDoc.Options = {
       },
     ],
   },
-  apis: [path.join(__dirname, "../email/email.route.ts")],
+  apis: [path.join(__dirname, "../**/*.route.ts")],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
 
 const swaggerDocs = (app: Express, port: number) => {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-  console.log(
-    `Swagger documentation is available at http://localhost:${port}/api-docs`
-  );
 
   // app.get("/docs.json", (req: Request, res: Response) => {
   //   res.setHeader("Content-Type", "application/json");

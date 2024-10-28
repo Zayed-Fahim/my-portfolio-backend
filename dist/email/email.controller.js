@@ -31,9 +31,7 @@ exports.sendTestMailController = sendTestMailController;
 const sendMailController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield (0, email_service_1.sendMailService)(req.body);
-        res
-            .status(response.statusCode)
-            .json({
+        res.status(response.statusCode).json({
             success: response.success,
             message: response.message,
             data: response.data,
