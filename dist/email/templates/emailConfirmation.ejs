@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message Received</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: auto auto;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inconsolata", monospace;
+      }
+
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        .message-box {
+          padding: 1.5rem;
+        }
+
+        .social-icons {
+          float: none;
+          text-align: center;
+          margin-top: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body
+    style="
+      max-height: fit-content;
+      max-width: 500px;
+      background-color: #27272a !important;
+      padding: 0 0 2rem 0;
+      border-radius: 16px;
+      text-align: center;
+    "
+  >
+    <!-- Navbar Section -->
+    <header style="border-bottom: 1px solid #9ca3af">
+      <a
+        style="text-decoration: none; cursor: pointer"
+        href="https://zayed-fahim.web.app"
+      >
+        <img
+          width="80"
+          loading="lazy"
+          src="https://i.ibb.co.com/Q8J5rP9/logo-4.png"
+          alt="logo"
+          style="text-align: center; padding: 1rem 0"
+        />
+      </a>
+    </header>
+
+    <!-- Main Content Section -->
+    <main style="display: block; padding: 2rem">
+      <div
+        style="
+          padding: 2rem;
+          border-radius: 10px;
+          max-width: 600px;
+          text-align: center;
+        "
+      >
+        <h1 style="color: #fff; margin-bottom: 1rem; font-weight: 700">
+          Thank You!
+          <span style="color: #0cce6b"><%= fullName %></span>
+        </h1>
+        <p style="color: #a1a1aa; line-height: 1.6; font-weight: 400">
+          Thanks for messaging me. Successfully I got your message. I will
+          contact you soon.
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer style="padding: 0 1.5rem; text-align: center">
+      <p style="color: #a1a1aa">
+        Copyright &copy; <%= new Date().getFullYear() %> Zayed Fahim. All rights
+        reserved.
+      </p>
+      <div style="margin-top: 20px">
+        <a
+          style="text-decoration: none"
+          href="https://github.com/Zayed-Fahim"
+          target="_blank"
+        >
+          <img
+            src="https://i.ibb.co.com/0fGKyrG/github-fill.png"
+            alt="github"
+            width="20"
+            title="GitHub"
+            referrerpolicy="origin"
+          />
+        </a>
+        <a
+          style="text-decoration: none"
+          href="https://linkedin.com/in/zayed-fahim"
+          target="_blank"
+        >
+          <img
+            src="https://i.ibb.co.com/1L8YDzb/linkedin-box-fill.png"
+            alt="linkedin"
+            width="20"
+            title="LinkedIn"
+            referrerpolicy="origin"
+          />
+        </a>
+        <a
+          style="text-decoration: none"
+          href="https://facebook.com/Zayed.Fahim33"
+          target="_blank"
+        >
+          <img
+            src="https://i.ibb.co.com/swZVLfF/facebook-box-fill.png"
+            alt="facebook"
+            width="20"
+            title="Facebook"
+            referrerpolicy="origin"
+          />
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
