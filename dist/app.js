@@ -73,12 +73,11 @@ else {
 exports.limiter = (0, express_rate_limit_1.rateLimit)({
     windowMs: 24 * 60 * 60 * 1000,
     limit: 5,
-    message: (req, res) => res.status(409).json({
-        success: false,
-        message: "Your limit exceeded! Please try again next day.",
-    }),
     keyGenerator: (req, res) => req.ip,
-    handler: (req, res, next, options) => res.status(options.statusCode).send(options.message),
+    handler: (req, res, next, options) => res.status(options.statusCode).json({
+        message: "Your limit exceeded! Please try again next day.",
+        success: false,
+    }),
     skip: (req, res) => allowlist.includes(req.ip),
     skipFailedRequests: true,
     standardHeaders: true,

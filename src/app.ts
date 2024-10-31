@@ -51,14 +51,12 @@ if (config.nodeEnvironment === "production") {
 export const limiter = rateLimit({
   windowMs: 24 * 60 * 60 * 1000,
   limit: 5,
-  message: (req: Request, res: Response) =>
-    res.status(409).json({
-      success: false,
-      message: "Your limit exceeded! Please try again next day.",
-    }),
   keyGenerator: (req: Request, res: Response) => req.ip!,
   handler: (req: Request, res: Response, next: NextFunction, options) =>
-    res.status(options.statusCode).send(options.message),
+    res.status(options.statusCode).json({
+      message: "Your limit exceeded! Please try again next day.",
+      success: false,
+    }),
   skip: (req: Request, res: Response) => allowlist.includes(req.ip!),
   skipFailedRequests: true,
   standardHeaders: true,
