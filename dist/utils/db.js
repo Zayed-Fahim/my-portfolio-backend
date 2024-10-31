@@ -20,7 +20,7 @@ const connect = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(mongoURL);
         console.log("Database connected successfully.");
-        if (process.env.NODE_ENV !== "production") {
+        if ((config_1.default === null || config_1.default === void 0 ? void 0 : config_1.default.nodeEnvironment) !== "production") {
             app_1.default.listen(config_1.default.port || 3001, () => console.log(`Swagger documentation is available at http://localhost:${config_1.default.port}/api-docs`));
         }
         else {

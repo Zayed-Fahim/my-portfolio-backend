@@ -1,5 +1,5 @@
-import Project from "../models/project.model";
 import { IProjectProps, IQueryProps } from "./project.interface";
+import Project from "./project.model";
 
 const addProjectService = async (data: IProjectProps) => {
   const isExist = await Project.exists({ title: data.title });

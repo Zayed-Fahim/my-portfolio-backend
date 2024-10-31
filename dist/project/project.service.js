@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getProjectsService = exports.addProjectService = void 0;
-const project_model_1 = __importDefault(require("../models/project.model"));
+const project_model_1 = __importDefault(require("./project.model"));
 const addProjectService = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const isExist = yield project_model_1.default.exists({ title: data.title });
     if (isExist) {

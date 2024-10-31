@@ -4,19 +4,25 @@ import path from "path";
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 export interface IConfig {
-  port: number;
-  mongoURL: string;
-  smtpFrom: string;
-  smtpHost: string;
-  smtpPort: string;
-  smtpUser: string;
-  smtpUsername: string;
-  smtpPass: string;
-  smtpConfirmationSubject: string;
+  nodeEnvironment: string | undefined;
+  allowlistIpsProduction: string | undefined;
+  allowlistIpDevelopment: string | undefined;
+  port: number | undefined;
+  mongoURL: string | undefined;
+  smtpFrom: string | undefined;
+  smtpHost: string | undefined;
+  smtpPort: string | undefined;
+  smtpUser: string | undefined;
+  smtpUsername: string | undefined;
+  smtpPass: string | undefined;
+  smtpConfirmationSubject: string | undefined;
 }
 
 const config = (): IConfig => {
   const {
+    NODE_ENV: nodeEnvironment,
+    ALLOWLIST_IPS_PRODUCTION: allowlistIpsProduction,
+    ALLOWLIST_IP_DEVELOPMENT: allowlistIpDevelopment,
     MONGODB_USERNAME: mongodbUsername,
     MONGODB_PASSWORD: mongodbPassword,
     MONGODB_HOST: mongodbHost,
@@ -53,7 +59,10 @@ const config = (): IConfig => {
   }
 
   return {
+    nodeEnvironment,
     port: parseInt(process.env.PORT || "3001", 10),
+    allowlistIpsProduction,
+    allowlistIpDevelopment,
     mongoURL,
     smtpFrom,
     smtpHost,

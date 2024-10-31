@@ -1,13 +1,18 @@
-import express, { Express, Request, Response } from "express";
 import cors from "cors";
+import express, { Express, NextFunction, Request, Response } from "express";
+import { rateLimit } from "express-rate-limit";
+import path from "path";
+import config from "./config";
 import emailRoute from "./email/email.route";
+import guestBookRouteGet, {
+  guestBookRoutePost,
+} from "./guestBook/guestBook.route";
 import projectRoute from "./project/project.route";
 import swaggerDocs from "./utils/swagger";
-import config from "./config";
-import path from "path";
 
 const app: Express = express();
 
+app.set("trust proxy", true);
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
@@ -35,10 +40,37 @@ app.use(
   })
 );
 
+// rate limit settings
+let allowlist: string[] = [];
+if (config.nodeEnvironment === "production") {
+  allowlist = config.allowlistIpsProduction?.split(",")!;
+} else {
+  allowlist.push(config.allowlistIpDevelopment!);
+}
+
+export const limiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000,
+  limit: 5,
+  message: (req: Request, res: Response) =>
+    res.status(409).json({
+      success: false,
+      message: "Your limit exceeded! Please try again next day.",
+    }),
+  keyGenerator: (req: Request, res: Response) => req.ip!,
+  handler: (req: Request, res: Response, next: NextFunction, options) =>
+    res.status(options.statusCode).send(options.message),
+  skip: (req: Request, res: Response) => allowlist.includes(req.ip!),
+  skipFailedRequests: true,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 app.use("/api/v2/email", emailRoute);
 app.use("/api/v2/projects", projectRoute);
+app.use("/api/v2/guest-book", guestBookRouteGet);
+app.post("/api/v2/guest-book", limiter, guestBookRoutePost);
 
-if (process.env.NODE_ENV !== "production") {
+if (config.nodeEnvironment !== "production") {
   swaggerDocs(app, Number(config.port));
 } else {
   app.get("/", (req: Request, res: Response) => {
